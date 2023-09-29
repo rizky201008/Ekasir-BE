@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer("price-1");
             $table->integer("price-2");
             $table->integer("price-3");
+            $table->foreignId('category_id');
             $table->timestamps();
         });
     }

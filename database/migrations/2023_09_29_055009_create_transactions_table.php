@@ -13,8 +13,13 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->integer('total');
-            $table->json('products');
+            $table->foreignId('user_id');
+            $table->foreignId('product_id');
+            $table->integer('qty');
+            $table->integer('price');
+            $table->enum('status', [
+                'success', 'pending', 'canceled'
+            ]);
             $table->timestamps();
         });
     }

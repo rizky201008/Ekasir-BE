@@ -13,13 +13,12 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
+            $table->integer('total');
+            $table->enum('payment_status',['lunas','hutang']);
+            $table->integer('payment_amount');
+            $table->integer('change_amount')->default(0);
+            $table->enum('payment_method',['transfer','cash']);
             $table->foreignId('user_id');
-            $table->foreignId('product_id');
-            $table->integer('qty');
-            $table->integer('price');
-            $table->enum('status', [
-                'success', 'pending', 'canceled'
-            ]);
             $table->timestamps();
         });
     }

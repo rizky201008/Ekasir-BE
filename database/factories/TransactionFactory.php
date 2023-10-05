@@ -18,10 +18,29 @@ class TransactionFactory extends Factory
     public function definition(): array
     {
         return [
-            'price' => rand(1000000, 5000000),
-            'product' => fake()->name(),
-            'amount' => rand(1,5),
-            'trxid' => Str::random(10),
+            'total' => rand(1000000, 5000000),
+            'payment_status' => $this->getStatus(rand(0, 1)),
+            'payment_amount' => rand(10000, 1000000),
+            'payment_method' => $this->getPaymentMethod(rand(0, 1)),
+            'user_id' => rand(1, 10)
         ];
+    }
+
+    function getStatus($status)
+    {
+        if ($status == 1) {
+            return 'lunas';
+        } else {
+            return 'hutang';
+        }
+    }
+
+    function getPaymentMethod($payment)
+    {
+        if ($payment == 1) {
+            return 'transfer';
+        } else {
+            return 'cash';
+        }
     }
 }

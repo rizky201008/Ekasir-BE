@@ -7,6 +7,7 @@ namespace Database\Seeders;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Transaction;
+use App\Models\TransactionDetail;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -28,5 +29,6 @@ class DatabaseSeeder extends Seeder
         Product::factory(10)->create();
         Transaction::factory(10)->create();
         User::factory(10)->create();
+        TransactionDetail::factory(10)->create();
     }
 }

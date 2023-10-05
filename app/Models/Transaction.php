@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\TransactionDetail;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Transaction extends Model
 {
@@ -12,8 +13,8 @@ class Transaction extends Model
 
     protected $guarded = ['id'];
 
-    function product(): HasMany
+    function transactionDetail(): HasMany
     {
-        return $this->hasMany(Product::class);
+        return $this->hasMany(TransactionDetail::class);
     }
 }

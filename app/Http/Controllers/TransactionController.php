@@ -9,15 +9,15 @@ use Illuminate\Support\Facades\Redis;
 
 class TransactionController extends Controller
 {
-    public $transactions;
-    function __construct()
-    {
-        $this->transactions = Transaction::all();
-    }
 
     function getTransactions()
     {
-        return response()->json($this->transactions);
+    }
+
+    function getTransactionDetail($id, Request $request)
+    {
+        $transaction = Transaction::find($id)->with('transactionDetail')->where('user_id', $request->user()->id)->get();
+        return response()->json($transaction);
     }
 
     function insertTransaction(Request $request)

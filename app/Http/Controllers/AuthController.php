@@ -20,7 +20,8 @@ class AuthController extends Controller
             'password' => $req->password
         ])) {
             $user = User::where('email', $req->email)->first();
-            $token = $user->createToken();
+            $ability = ($user->role == 'admin') ? 'admin' : 'password';
+            $token = $user->createToken('access-token', [$ability]);
 
             return response()->json([
                 'token' => $token->plainTextToken
@@ -59,6 +60,5 @@ class AuthController extends Controller
 
     function forgotPassword()
     {
-        
     }
 }

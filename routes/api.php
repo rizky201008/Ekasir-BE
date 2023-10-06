@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -28,4 +30,15 @@ Route::group(['prefix' => '/admin'], function () {
     Route::post('/categories', [CategoryController::class, 'insertCategory']);
     Route::get('/transactions', [TransactionController::class, 'getTransactions']);
     Route::post('/transactions', [TransactionController::class, 'insertTransaction']);
+})->middleware(['auth:sanctum']);
+
+Route::prefix('/auth')->group(function () {
+    Route::post('/login',[AuthController::class,'login']);
+    Route::post('/register',[AuthController::class,'register']);
+    Route::post('/logout',[AuthController::class,'logout']);
+    Route::post('/forgot',[AuthController::class,'forgotPassword']);
+});
+
+Route::middleware(['auth:sanctum'])->prefix('/user')->group(function () {
+    Route::get('/transactions', [UserController::class,'transactions']);
 });

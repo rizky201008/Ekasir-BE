@@ -12,11 +12,12 @@ class TransactionController extends Controller
 
     function getTransactions()
     {
+        return response()->json(Transaction::paginate(30));
     }
 
-    function getTransactionDetail($id, Request $request)
+    function getTransactionDetail($id)
     {
-        $transaction = Transaction::find($id)->with('transactionDetail')->where('user_id', $request->user()->id)->get();
+        $transaction = Transaction::find($id)->transactionDetail;
         return response()->json($transaction);
     }
 

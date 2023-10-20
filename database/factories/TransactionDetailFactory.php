@@ -20,7 +20,7 @@ class TransactionDetailFactory extends Factory
             'product' => fake()->name(),
             'price' => rand(10000, 10000000),
             'qty' => rand(1, 5),
-            'transaction_id' => rand(1, 10)
+            'transaction_id' => rand(1, 100)
         ];
     }
 }

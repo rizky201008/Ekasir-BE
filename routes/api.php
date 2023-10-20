@@ -23,14 +23,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(['prefix' => '/admin'], function () {
+Route::middleware('auth:sanctum')->prefix('/admin')->group(function () {
     Route::get('/products', [ProductController::class, 'getProducts']);
     Route::post('/products', [ProductController::class, 'insertProduct']);
     Route::get('/categories', [CategoryController::class, 'getCategories']);
     Route::post('/categories', [CategoryController::class, 'insertCategory']);
     Route::get('/transactions', [TransactionController::class, 'getTransactions']);
+    Route::get('/transaction-detail/{id}', [TransactionController::class, 'getTransactionDetail']);
     Route::post('/transactions', [TransactionController::class, 'insertTransaction']);
-})->middleware(['auth:sanctum']);
+});
 
 Route::prefix('/auth')->group(function () {
     Route::post('/login',[AuthController::class,'login']);

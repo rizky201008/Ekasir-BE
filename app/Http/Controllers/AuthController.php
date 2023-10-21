@@ -24,28 +24,39 @@ class AuthController extends Controller
             $token = $user->createToken('access-token', [$ability]);
 
             return response()->json([
+                'message' => 'Login success 🎉🎉🎉',
                 'token' => $token->plainTextToken
-            ], 201);
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'Login failed please check your credential',
+            ], 401);
         }
     }
 
     function register(Request $req)
     {
         $req->validate([
-            'email' => 'required|email',
-            'password' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:8',
             'name' => 'required'
         ]);
 
-        User::create([
+        $created = User::create([
             'email' => $req->email,
             'password' => $req->password,
             'name' => $req->name
         ]);
 
-        return response()->json([
-            'message' => 'Successfuly register!'
-        ], 201);
+        if ($created) {
+            return response()->json([
+                'message' => 'Successfuly register!'
+            ], 201);
+        } else {
+            return response()->json([
+                'message' => 'Server error'
+            ], 500);
+        }
     }
 
     function logout(Request $req)
@@ -59,6 +70,10 @@ class AuthController extends Controller
     }
 
     function forgotPassword()
+    {
+    }
+
+    function changePassword()
     {
     }
 }

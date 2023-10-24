@@ -2,11 +2,13 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +41,8 @@ Route::prefix('/auth')->group(function () {
     Route::post('/logout',[AuthController::class,'logout']);
     Route::post('/forgot',[AuthController::class,'forgotPassword']);
 });
+
+Route::get('/transaction-amount',[DashboardController::class,'getTotalTransaction']);
 
 Route::middleware(['auth:sanctum'])->prefix('/user')->group(function () {
     Route::get('/transactions', [UserController::class,'transactions']);

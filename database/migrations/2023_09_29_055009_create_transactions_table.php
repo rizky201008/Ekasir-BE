@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('total');
             $table->enum('payment_status',['lunas','hutang']);
+            $table->enum('transaction_status',['proses','terkirim','selesai','batal'])->default('proses');
             $table->integer('payment_amount');
             $table->integer('change_amount')->default(0);
             $table->enum('payment_method',['transfer','cash']);

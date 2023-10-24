@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
 
         Category::factory(10)->create();
         Product::factory(10)->create();
-        Transaction::factory(100)->create();
+        Transaction::factory(300)->create();
         User::factory(10)->create();
         TransactionDetail::factory(200)->create();
     }

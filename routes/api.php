@@ -33,6 +33,7 @@ Route::middleware('auth:sanctum')->prefix('/admin')->group(function () {
     Route::get('/transactions', [TransactionController::class, 'getTransactions']);
     Route::get('/transaction-detail/{id}', [TransactionController::class, 'getTransactionDetail']);
     Route::post('/transactions', [TransactionController::class, 'insertTransaction']);
+    Route::get('/transaction-amount',[DashboardController::class,'getTotalTransaction']);
 });
 
 Route::prefix('/auth')->group(function () {
@@ -42,7 +43,6 @@ Route::prefix('/auth')->group(function () {
     Route::post('/forgot',[AuthController::class,'forgotPassword']);
 });
 
-Route::get('/transaction-amount',[DashboardController::class,'getTotalTransaction']);
 
 Route::middleware(['auth:sanctum'])->prefix('/user')->group(function () {
     Route::get('/transactions', [UserController::class,'transactions']);

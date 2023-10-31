@@ -32,6 +32,7 @@ Route::middleware('auth:sanctum')->prefix('/admin')->group(function () {
     Route::post('/categories', [CategoryController::class, 'insertCategory']);
     Route::get('/transactions', [TransactionController::class, 'getTransactions']);
     Route::get('/transaction-detail/{id}', [TransactionController::class, 'getTransactionDetail']);
+    Route::post('/transaction-detail', [TransactionController::class, 'insertDetailTransaction']);
     Route::post('/transactions', [TransactionController::class, 'insertTransaction']);
     Route::get('/transaction-amount',[DashboardController::class,'getTotalTransaction']);
 });

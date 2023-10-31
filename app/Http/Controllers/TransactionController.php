@@ -59,4 +59,30 @@ class TransactionController extends Controller
             'message' => 'Transaction created!'
         ], 201);
     }
+
+    function insertDetailTransaction(Request $request)
+    {
+        $request->validate([
+            'data' => 'required|array',
+            'data.*.product' => 'required|numeric',
+            'data.*.price' => 'required|numeric',
+            'data.*.qty' => 'required|numeric',
+            'data.*.transaction_id' => 'required|numeric',
+        ]);
+
+        $requestData = $request->input('data');
+
+        foreach ($requestData as $data) {
+            TransactionDetail::create([
+                'product' => $data['product'],
+                'price' => $data['price'],
+                'qty' => $data['qty'],
+                'transaction_id' => $data['transaction_id'],
+            ]);
+        }
+
+        return response()->json([
+            'message' => 'Transaction detail successfully added'
+        ], 201);
+    }
 }

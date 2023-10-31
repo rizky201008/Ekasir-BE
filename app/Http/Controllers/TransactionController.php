@@ -64,7 +64,7 @@ class TransactionController extends Controller
     {
         $request->validate([
             'data' => 'required|array',
-            'data.*.product' => 'required|numeric',
+            'data.*.product' => 'required',
             'data.*.price' => 'required|numeric',
             'data.*.qty' => 'required|numeric',
             'data.*.transaction_id' => 'required|numeric',
